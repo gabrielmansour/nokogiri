@@ -18,6 +18,7 @@ require 'nokogiri/xml/reader'
 require 'nokogiri/xml/notation'
 require 'nokogiri/xml/element'
 require 'nokogiri/xml/entity_declaration'
+require 'nokogiri/xml/schema'
 
 module Nokogiri
   class << self

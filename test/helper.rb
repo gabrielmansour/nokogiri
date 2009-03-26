@@ -15,6 +15,8 @@ module Nokogiri
     EXSLT_FILE = File.join(ASSETS_DIR, 'exslt.xslt')
     EXML_FILE = File.join(ASSETS_DIR, 'exslt.xml')
     HTML_FILE = File.join(ASSETS_DIR, 'tlm.html')
+    PO_XML_FILE = File.join(ASSETS_DIR, 'po.xml')
+    PO_SCHEMA_FILE = File.join(ASSETS_DIR, 'po.xsd')
 
     unless RUBY_VERSION >= '1.9'
       undef :default_test

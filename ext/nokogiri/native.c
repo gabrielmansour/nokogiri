@@ -70,4 +70,5 @@ void Init_native()
   init_xslt_stylesheet();
   init_xml_syntax_error();
   init_html_entity_lookup();
+  init_xml_schema();
 }
