@@ -9,6 +9,42 @@ static void dealloc(xmlSchemaPtr schema)
 
 /*
  * call-seq:
+ *  validate_document(document)
+ *
+ * Validate a Nokogiri::XML::Document against this Schema.
+ */
+static VALUE validate_document(VALUE self, VALUE document)
+{
+  xmlDocPtr doc;
+  xmlSchemaPtr schema;
+
+  Data_Get_Struct(self, xmlSchema, schema);
+  Data_Get_Struct(document, xmlDoc, doc);
+
+  VALUE errors = rb_ary_new();
+
+  xmlSchemaValidCtxtPtr valid_ctxt = xmlSchemaNewValidCtxt(schema);
+
+  if(NULL == valid_ctxt) {
+    // we have a problem
+    rb_raise(rb_eRuntimeError, "Could not create a validation context");
+  }
+
+  xmlSchemaSetValidStructuredErrors(
+    valid_ctxt,
+    Nokogiri_error_array_pusher,
+    (void *)errors
+  );
+
+  xmlSchemaValidateDoc(valid_ctxt, doc);
+
+  xmlSchemaFreeValidCtxt(valid_ctxt);
+
+  return errors;
+}
+
+/*
+ * call-seq:
  *  read_memory(string)
  *
  * Create a new Schema from the contents of +string+
@@ -35,6 +71,18 @@ static VALUE read_memory(VALUE klass, VALUE content)
   xmlSetStructuredErrorFunc(NULL, NULL);
   xmlSchemaFreeParserCtxt(ctx);
 
+  if(NULL == schema) {
+    xmlErrorPtr error = xmlGetLastError();
+    if(error)
+      rb_funcall(rb_mKernel, rb_intern("raise"), 1,
+          Nokogiri_wrap_xml_syntax_error((VALUE)NULL, error)
+      );
+    else
+      rb_raise(rb_eRuntimeError, "Could not parse document");
+
+    return Qnil;
+  }
+
   VALUE rb_schema = Data_Wrap_Struct(klass, 0, 0, schema);
   rb_iv_set(rb_schema, "@errors", errors);
 
@@ -51,4 +99,5 @@ void init_xml_schema()
   cNokogiriXmlSchema = klass;
 
   rb_define_singleton_method(klass, "read_memory", read_memory, 1);
+  rb_define_private_method(klass, "validate_document", validate_document, 1);
 }
