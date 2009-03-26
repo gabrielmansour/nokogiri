@@ -6,9 +6,15 @@ module Nokogiri
       def setup
         assert @xsd = Nokogiri::XML::Schema(File.read(PO_SCHEMA_FILE))
       end
+
       def test_parse_with_memory
         assert_instance_of Nokogiri::XML::Schema, @xsd
         assert_equal 0, @xsd.errors.length
+      end
+
+      def test_new
+        assert xsd = Nokogiri::XML::Schema.new(File.read(PO_SCHEMA_FILE))
+        assert_instance_of Nokogiri::XML::Schema, xsd
       end
 
       def test_parse_with_io
