@@ -36,10 +36,10 @@ ext/nokogiri/xml_node_set.c
 ext/nokogiri/xml_node_set.h
 ext/nokogiri/xml_processing_instruction.c
 ext/nokogiri/xml_processing_instruction.h
-ext/nokogiri/xml_processing_instruction.o
 ext/nokogiri/xml_reader.c
 ext/nokogiri/xml_reader.h
-ext/nokogiri/xml_reader.o
+ext/nokogiri/xml_relax_ng.c
+ext/nokogiri/xml_relax_ng.h
 ext/nokogiri/xml_sax_parser.c
 ext/nokogiri/xml_sax_parser.h
 ext/nokogiri/xml_sax_push_parser.c
@@ -99,6 +99,7 @@ lib/nokogiri/xml/node_set.rb
 lib/nokogiri/xml/notation.rb
 lib/nokogiri/xml/processing_instruction.rb
 lib/nokogiri/xml/reader.rb
+lib/nokogiri/xml/relax_ng.rb
 lib/nokogiri/xml/sax.rb
 lib/nokogiri/xml/sax/document.rb
 lib/nokogiri/xml/sax/parser.rb
@@ -117,6 +118,8 @@ test/css/test_nthiness.rb
 test/css/test_parser.rb
 test/css/test_tokenizer.rb
 test/css/test_xpath_visitor.rb
+test/files/address_book.rlx
+test/files/address_book.xml
 test/files/dont_hurt_em_why.xml
 test/files/exslt.xml
 test/files/exslt.xslt
@@ -174,6 +177,7 @@ test/xml/test_node_encoding.rb
 test/xml/test_node_set.rb
 test/xml/test_processing_instruction.rb
 test/xml/test_reader_encoding.rb
+test/xml/test_relax_ng.rb
 test/xml/test_schema.rb
 test/xml/test_text.rb
 test/xml/test_unparented_node.rb

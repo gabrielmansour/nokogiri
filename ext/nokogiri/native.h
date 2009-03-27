@@ -90,6 +90,7 @@ int vasprintf (char **strp, const char *fmt, va_list ap);
 #include <xslt_stylesheet.h>
 #include <xml_syntax_error.h>
 #include <xml_schema.h>
+#include <xml_relax_ng.h>
 
 extern VALUE mNokogiri ;
 extern VALUE mNokogiriXml ;
