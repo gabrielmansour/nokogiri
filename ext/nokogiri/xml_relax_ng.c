@@ -1,6 +1,6 @@
 #include <xml_relax_ng.h>
 
-static void dealloc(xmlSchemaPtr schema)
+static void dealloc(xmlRelaxNGPtr schema)
 {
   NOKOGIRI_DEBUG_START(doc);
   xmlRelaxNGFree(schema);
